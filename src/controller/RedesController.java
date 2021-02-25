@@ -13,17 +13,17 @@ public class RedesController {
 		public void ip(String os) {
 		 if (os.contains("Windows")) { //validando S.O para Windows
 			 try {
-		Process p = Runtime.getRuntime().exec("ipconfig"); //comando para configuração ip em windows
+		Process p = Runtime.getRuntime().exec("ipconfig"); //comando para configuraï¿½ï¿½o ip em windows
 		InputStream fluxo = p.getInputStream(); // trazendo os dados do processo "ipconfig"
 		InputStreamReader leitor = new InputStreamReader(fluxo); //efetuando leitura dos dados
 		BufferedReader buffer = new BufferedReader(leitor); //
 	    String linha = buffer.readLine();
 		    while (linha != null) {
-			    if (linha.contains("Adaptador")) { // condição para exibir adptador
+			    if (linha.contains("Adaptador")) { // condiï¿½ï¿½o para exibir adptador
 				String adapt = linha;
 				for (int i=0; i<=5; i++) {
 					linha = buffer.readLine();
-					if (linha.contains("IPv4")) { // condição para exibir IPv4
+					if (linha.contains("IPv4")) { // condiï¿½ï¿½o para exibir IPv4
 					System.out.println(adapt);
 					System.out.println(linha);
 					} // do IPv4
@@ -36,27 +36,29 @@ public class RedesController {
 		buffer.close();
 		leitor.close();
 		fluxo.close();
-		} catch (IOException e) { //catch - saída do try
+		} catch (IOException e) { //catch - saï¿½da do try
 			e.printStackTrace();
 	}// fim do catch
 			 
 } // do if (S.O)
 		 else { // do s.o
 			 try {
-			 Process p = Runtime.getRuntime().exec("ifconfig"); //comando para configuração ip em Linux
+			 Process p = Runtime.getRuntime().exec("ifconfig"); //comando para configuraï¿½ï¿½o ip em Linux
 			 InputStream fluxo = p.getInputStream(); // trazendo os dados do processo "ifconfig"
 			 InputStreamReader leitor = new InputStreamReader(fluxo); //efetuando leitura dos dados
 			 BufferedReader buffer = new BufferedReader(leitor); //
 			 String linha = buffer.readLine();
 			  while (linha != null) {
-				if (linha.contains("mtu")) { // condição para exibir adptador
+				if (linha.contains("mtu")) { // condiï¿½ï¿½o para exibir adptador
 				  String adapt = linha;
 				  linha = buffer.readLine();
+				  if (linha.contains("inet")) {
 				  String inet = linha;
 				  String[] vetorInet = inet.split(" "); // criando split com a variavel inet (linha do inet linux)
-				 System.out.println(adapt);
-				 System.out.println(vetorInet[1]); // imprimindo "2ª" posição do vetor (onde fica localizado o inet)"
-			   } // do if
+				 System.out.println("Adaptador: " + adapt);
+				 System.out.println("Ipv4 [inet]: " + vetorInet[9]); // imprimindo "decima" posiï¿½ï¿½o do vetor (onde fica localizado o inet)"
+				  } // do if contains inet
+				  } // do if mtu
 			 else { //else do adptador
 					linha = buffer.readLine();
 				} // do else
@@ -64,11 +66,11 @@ public class RedesController {
 					buffer.close();
 					leitor.close();
 					fluxo.close();
-					} catch (IOException e) { //catch - saída do try
+					} catch (IOException e) { //catch - saï¿½da do try
 					e.printStackTrace();
 				}// fim do catch
 		 } // do else (s.o)
-	}//do método ip
+	}//do mï¿½todo ip
 } // da classe
 						
 						
