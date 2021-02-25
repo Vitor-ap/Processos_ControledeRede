@@ -58,7 +58,7 @@ public class RedesController {
 				 System.out.println("Adaptador: " + adapt);
 				 System.out.println("Ipv4 [inet]: " + vetorInet[9]); // imprimindo "decima" posi��o do vetor (onde fica localizado o inet)"
 				  } // do if contains inet
-				  } // do if mtu
+				  } // do if mtu.
 			 else { //else do adptador
 					linha = buffer.readLine();
 				} // do else
