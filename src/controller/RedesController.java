@@ -13,17 +13,17 @@ public class RedesController {
 		public void ip(String os) {
 		 if (os.contains("Windows")) { //validando S.O para Windows
 			 try {
-		Process p = Runtime.getRuntime().exec("ipconfig"); //comando para configura��o ip em windows
+		Process p = Runtime.getRuntime().exec("ipconfig"); //comando para configuracao ip em windows
 		InputStream fluxo = p.getInputStream(); // trazendo os dados do processo "ipconfig"
 		InputStreamReader leitor = new InputStreamReader(fluxo); //efetuando leitura dos dados
 		BufferedReader buffer = new BufferedReader(leitor); //
 	    String linha = buffer.readLine();
 		    while (linha != null) {
-			    if (linha.contains("Adaptador")) { // condi��o para exibir adptador
+			    if (linha.contains("Adaptador")) { // condicao para exibir adptador
 				String adapt = linha;
 				for (int i=0; i<=5; i++) {
 					linha = buffer.readLine();
-					if (linha.contains("IPv4")) { // condi��o para exibir IPv4
+					if (linha.contains("IPv4")) { // condicao para exibir IPv4
 					System.out.println(adapt);
 					System.out.println(linha);
 					} // do IPv4
@@ -43,13 +43,13 @@ public class RedesController {
 } // do if (S.O)
 		 else { // do s.o
 			 try {
-			 Process p = Runtime.getRuntime().exec("ifconfig"); //comando para configura��o ip em Linux
+			 Process p = Runtime.getRuntime().exec("ifconfig"); //comando para configuracao ip em Linux
 			 InputStream fluxo = p.getInputStream(); // trazendo os dados do processo "ifconfig"
 			 InputStreamReader leitor = new InputStreamReader(fluxo); //efetuando leitura dos dados
 			 BufferedReader buffer = new BufferedReader(leitor); //
 			 String linha = buffer.readLine();
 			  while (linha != null) {
-				if (linha.contains("mtu")) { // condi��o para exibir adptador
+				if (linha.contains("mtu")) { // condicao para exibir adptador
 				  String adapt = linha;
 				  linha = buffer.readLine();
 				  if (linha.contains("inet")) {
@@ -66,15 +66,58 @@ public class RedesController {
 					buffer.close();
 					leitor.close();
 					fluxo.close();
-					} catch (IOException e) { //catch - sa�da do try
+					} catch (IOException e) { //catch - saida do try
 					e.printStackTrace();
 				}// fim do catch
 		 } // do else (s.o)
-	}//do m�todo ip
-} // da classe
+	}//do metodo ip
 						
-						
-			
+	public void ping(String os) {
+	if (os.contains("Windows")) {
+		try {
+			Process p = Runtime.getRuntime().exec("ping -4 -n 10 www.google.com.br");
+			InputStream fluxo = p.getInputStream();
+			InputStreamReader leitor = new InputStreamReader(fluxo);
+			BufferedReader buffer = new BufferedReader(leitor);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				if (linha.contains("M")) {
+					String vetorMedia[] = linha.split(",");
+					System.out.println(vetorMedia[2]);
+				}
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitor.close();
+			fluxo.close();
+					} catch (IOException e) {
+			e.printStackTrace();
+		}
+				
+	} // do if s.o
+	else { 
+		try {
+			Process p = Runtime.getRuntime().exec("ping -4 -c 10 www.google.com.br");
+			InputStream fluxo = p.getInputStream();
+			InputStreamReader leitor = new InputStreamReader(fluxo);
+			BufferedReader buffer = new BufferedReader(leitor);
+			String linha = buffer.readLine();
+			while (linha != null) {
+				if (linha.contains("mdev")) {
+					String vetorMedia[] = linha.split("/");
+					System.out.println("Tempo medio do ping: " + vetorMedia[4] + " ms.");
+				}
+				linha = buffer.readLine();
+			}
+			buffer.close();
+			leitor.close();
+			fluxo.close();
+					} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	} //do metodo ping
+} //da classe
 			
 			
 		

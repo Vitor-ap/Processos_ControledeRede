@@ -8,6 +8,7 @@ public class Main {
 		RedesController redes = new RedesController();
 		String os = System.getProperty("os.name");
 		redes.ip(os);
+		redes.ping(os);
 	}
 
 }
