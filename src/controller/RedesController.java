@@ -83,8 +83,8 @@ public class RedesController {
 			String linha = buffer.readLine();
 			while (linha != null) {
 				if (linha.contains("M")) {
-					String vetorMedia[] = linha.split(",");
-					System.out.println(vetorMedia[2]);
+					String vetorMedia[] = linha.split("=");
+					System.out.println("Tempo medio de:"+vetorMedia[3]);
 				}
 				linha = buffer.readLine();
 			}
