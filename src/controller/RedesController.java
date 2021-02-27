@@ -11,6 +11,7 @@ public class RedesController {
 		}
 		
 		public void ip(String os) {
+			String adapt = " ";
 		 if (os.contains("Windows")) { //validando S.O para Windows
 			 try {
 		Process p = Runtime.getRuntime().exec("ipconfig"); //comando para configuracao ip em windows
@@ -20,23 +21,23 @@ public class RedesController {
 	    String linha = buffer.readLine();
 		    while (linha != null) {
 			    if (linha.contains("Adaptador")) { // condicao para exibir adptador
-				String adapt = linha;
-				for (int i=0; i<=5; i++) {
-					linha = buffer.readLine();
+				adapt = linha;
+				linha = buffer.readLine();
+			    }
 					if (linha.contains("IPv4")) { // condicao para exibir IPv4
+					String vetIp[] = linha.split(": ");
 					System.out.println(adapt);
-					System.out.println(linha);
-					} // do IPv4
-			} // do for
-			    }// do adaptador
-				else { //else do adptador
+					System.out.println("Endereco do IPv4: " +vetIp[1]);
 					linha = buffer.readLine();
-				} // do else
-				} // do while
+			    } 
+					else {
+					linha = buffer.readLine();
+					} //do else
+				} 
 		buffer.close();
 		leitor.close();
 		fluxo.close();
-		} catch (IOException e) { //catch - sa�da do try
+		} catch (IOException e) { //catch - saida do try
 			e.printStackTrace();
 	}// fim do catch
 			 
@@ -50,13 +51,13 @@ public class RedesController {
 			 String linha = buffer.readLine();
 			  while (linha != null) {
 				if (linha.contains("mtu")) { // condicao para exibir adptador
-				  String adapt = linha;
+				  adapt = linha;
 				  linha = buffer.readLine();
 				  if (linha.contains("inet")) {
 				  String inet = linha;
 				  String[] vetorInet = inet.split(" "); // criando split com a variavel inet (linha do inet linux)
 				 System.out.println("Adaptador: " + adapt);
-				 System.out.println("Ipv4 [inet]: " + vetorInet[9]); // imprimindo "decima" posi��o do vetor (onde fica localizado o inet)"
+				 System.out.println("Ipv4 [inet]: " + vetorInet[9]); // imprimindo "decima" posicaoo do vetor (onde fica localizado o inet)"
 				  } // do if contains inet
 				  } // do if mtu.
 			 else { //else do adptador
