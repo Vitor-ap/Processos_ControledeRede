@@ -62,18 +62,15 @@ public class RedesController {
 				 	if (linha.contains("mtu")) { 
 				 	adapt = linha;
 				 	linha = buffer.readLine();
-				 	}
-				 		if (linha.contains("inet")) {
-				 		String inet = linha;
-				 		String[] vetorInet = inet.split(" "); // criando split com a variavel inet (linha do inet linux)
-				 		tela.append("Adaptador: "+adapt);
-				 		tela.append("\n");
-				 		tela.append("Endereco do IPv4 (iNet): " +vetorInet[9]);
-				 		tela.append("\n\n");
+					String inet = linha;
+					String[] vetorInet = inet.split(" "); // criando split com a variavel inet (linha do inet linux)
+					tela.append("Adaptador: "+ adapt);
+					tela.append("\n");
+					tela.append("Endereco do IPv4 (iNet): " +vetorInet[9]);
+					tela.append("\n\n");
 				 	} 
-
-				 		else { 
-				 		linha = buffer.readLine();
+				 	else { 
+				 	linha = buffer.readLine();
 				 		} 
 				} 
 			JOptionPane.showMessageDialog(null, tela);
